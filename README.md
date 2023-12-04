@@ -21,5 +21,5 @@ This project is a Django-based web application for statistical analysis of CSV d
 
 1. Clone the repository:
    ```bash
-   git clone [<repository-url>](https://github.com/adityaaa1702/TASK-TENSORGO)https://github.com/adityaaa1702/TASK-TENSORGO
+   git clone [<repository-url>](https://github.com/adityaaa1702/TASK-TENSORGO)https://github.com/adityaaa1702/TASK-TENSORGO)
    cd statistical-analysis-app
