@@ -14,7 +14,7 @@ This project is a Django-based web application for statistical analysis of CSV d
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3.10
 - Django
 
 ### Installation
