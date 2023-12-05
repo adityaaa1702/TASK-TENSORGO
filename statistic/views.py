@@ -14,6 +14,7 @@ def index(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file_instance = form.save()
+            request.session['uploaded_file_path'] = file_instance.csv_file.path
 
             
             csv_data = pd.read_csv(file_instance.csv_file)
@@ -52,31 +53,28 @@ def index(request):
 
 
 def result(request):
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            
-            uploaded_file = form.save()
+    
+    uploaded_file_path = request.session.get('uploaded_file_path')
 
-            
-            df = pd.read_csv(uploaded_file.csv_file)
-
-            
-            height_column = df.iloc[:, 1]
-
-            
-            mean_value = height_column.mean()
-            mode_value = height_column.mode()[0] if not height_column.mode().empty else None
-            median_value = height_column.median()
+    if uploaded_file_path:
+       
+        data = pd.read_csv(uploaded_file_path)
 
         
-            context = {
-                'mean_value': mean_value,
-                'mode_value': mode_value,
-                'median_value': median_value,
-            }
+        analysis_result, plot_data, generated_text= perform_statistical_analysis(data, question="Your question", plot_type="scatter")
+        
+        mean_value = analysis_result.mean().iloc[0]
+        mode_value = analysis_result.mode().iloc[0, 0] if not analysis_result.mode().empty else None
+        median_value = analysis_result.median().iloc[0]
+        
+        
+        context = {
+            'mean_value': mean_value,
+            'mode_value': mode_value,
+            'median_value': median_value,  # If you want to use the generated text in the template
+        }
 
-            
-            return render(request, 'result.html', context)
+        return render(request, 'result.html', context)
 
-    return render(request, 'result.html')
+    else:
+        return redirect('index_page')
