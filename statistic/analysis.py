@@ -15,20 +15,21 @@ def perform_statistical_analysis(data, question=None, plot_type='histogram'):
     if plot_type == 'histogram':
         plt.hist(data.iloc[:, 0], bins=30, color='blue', alpha=0.7)
         plt.title('Histogram of Data')
-        plt.xlabel('Values')
-        plt.ylabel('Frequency')
+        plt.xlabel(data.columns[0])
+        plt.ylabel(data.columns[1])
+        plt.ylim(top=200)
         plt.grid(True)
     elif plot_type == 'scatter':
         plt.scatter(data.iloc[:, 0], data.iloc[:, 1], color='red', alpha=0.7)
         plt.title('Scatter Plot')
-        plt.xlabel('X Values')
-        plt.ylabel('Y Values')
+        plt.xlabel(data.columns[0])
+        plt.ylabel(data.columns[1])
         plt.grid(True)
     elif plot_type == 'line':
         plt.plot(data.iloc[:, 0], data.iloc[:, 1], color='green', marker='o', linestyle='-', linewidth=2, markersize=8)
         plt.title('Line Plot')
-        plt.xlabel('X Values')
-        plt.ylabel('Y Values')
+        plt.xlabel(data.columns[0])
+        plt.ylabel(data.columns[1])
         plt.grid(True)
     
 

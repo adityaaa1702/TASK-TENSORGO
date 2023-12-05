@@ -50,5 +50,33 @@ def index(request):
 
     return render(request, 'index.html', context)
 
+
 def result(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            
+            uploaded_file = form.save()
+
+            
+            df = pd.read_csv(uploaded_file.csv_file)
+
+            
+            height_column = df.iloc[:, 1]
+
+            
+            mean_value = height_column.mean()
+            mode_value = height_column.mode()[0] if not height_column.mode().empty else None
+            median_value = height_column.median()
+
+        
+            context = {
+                'mean_value': mean_value,
+                'mode_value': mode_value,
+                'median_value': median_value,
+            }
+
+            
+            return render(request, 'result.html', context)
+
     return render(request, 'result.html')

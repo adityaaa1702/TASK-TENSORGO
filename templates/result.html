@@ -1,4 +1,4 @@
-
+<!-- templates/result.html -->
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -6,13 +6,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        img {
+            max-width: 80%; /* Adjust the size as needed */
+            margin-top: 20px;
+            border: 4px solid #007bff;
+            border-radius: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-top: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.5rem; /* Adjust the font size as needed */
+        }
+        
+        /* Adjust the width as needed */
+        .stats-card {
+            width: 300px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Analysis Result</h1>
-    <h3>Data Visualization:</h3>
-    <img src="{% static 'generatedplot.png' %}" alt="Generated Plot">
+    <div class="container">
+        <h3>Data Visualization:</h3>
+        <img src="{% static 'generatedplot.png' %}" alt="Generated Plot">
 
-   
+        <div class="row justify-content-between">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Ask a Question</h5>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="userQuestion">Your Question:</label>
+                                <input type="text" class="form-control" id="userQuestion" name="user_question">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Ask Question</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Right Column: Statistical Measures Card -->
+            <div class="col-md-5">
+                <div class="card stats-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Statistical Measures</h5>
+                        <!-- Add the statistical values here based on your project -->
+                        <p>Mean: {{ mean_value }}</p>
+                        <p>Mode: {{ mode_value }}</p>
+                        <p>Median: {{ median_value }}</p>
+                        <!-- Add more statistical values as needed -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setQuestion(question) {
+            document.getElementById('userQuestion').value = question;
+        }
+    </script>
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

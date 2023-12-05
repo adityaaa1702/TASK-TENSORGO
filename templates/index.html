@@ -1,5 +1,5 @@
-
-{% load static %} 
+<!-- templates/index.html -->
+{% load static %} <!-- Add this line at the top -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistical Analysis App</title>
+    <!-- Add any additional CSS libraries or stylesheets here -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         img {
@@ -23,10 +24,18 @@
         .card {
             margin-top: 20px;
         }
+
+        /* Center the card horizontally */
+        .center-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust this if needed */
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container center-card"> <!-- Add the center-card class -->
         
         <div class="row">
             <div class="col-md-12 text-center">
@@ -35,73 +44,29 @@
             </div>
         </div>
 
-        <!-- Ask Question Card -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Ask a Question</h5>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                    Ask a question about the data:
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" onclick="setQuestion('Action')"><div class="form-group">
-                                        <label for="userQuestion">Your Question:</label>
-                                        <input type="text" class="form-control" id="userQuestion" name="user_question">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Ask Question</button></a></li>
-                                </ul>
-                            </div>
-                            
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Upload and Analyze Card -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Upload and Analyze</h5>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="form-group">
-                                <label for="plotType">Select plot type:</label>
-                                <select class="form-control" id="plotType" name="plot_type">
-                                    <option value="histogram">Histogram</option>
-                                    <option value="scatter">Scatter Plot</option>
-                                    <option value="line">Line Plot</option>
-                                   
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Upload and Analyze</button>
-                        </form>
-                    </div>
+        <!-- Data Upload and Analyze Card -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Upload and Analyze</h5>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-group">
+                            <label for="plotType">Select plot type:</label>
+                            <select class="form-control" id="plotType" name="plot_type">
+                                <option value="histogram">Histogram</option>
+                                <option value="scatter">Scatter Plot</option>
+                                <option value="line">Line Plot</option>
+                               
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload and Analyze</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <!-- Display Analysis Results -->
-        {% if message %}
-            <p>{{ message }}</p>
-            {% if analysis_result %}
-                <h3>Analysis Result:</h3>
-                <p>{{ analysis_result }}</p>
-            {% endif %}
-            {% if plot_filename %}
-                <h3>Data Visualization:</h3>
-                <img src="{% static plot_filename %}" alt="Generated Plot">
-            {% endif %}
-            {% if generated_text %}
-                <h3>Generated Answer:</h3>
-                <p>{{ generated_text }}</p>
-            {% endif %}
-        {% endif %}
-    </div>
 
     <script>
         function setQuestion(question) {
