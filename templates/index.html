@@ -1,5 +1,5 @@
-<!-- templates/index.html -->
-{% load static %} <!-- Add this line at the top -->
+
+{% load static %} 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,9 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statistical Analysis App</title>
-    <!-- Add any additional CSS libraries or stylesheets here -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
+        body {
+            background-image: url('{% static "bd.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
         img {
             max-width: 100%;
             margin-top: 20px;
@@ -20,22 +25,25 @@
             margin-right: auto;
         }
 
-        /* Additional styling for the new card */
         .card {
-            margin-top: 20px;
+             background: rgba(25, 34, 32, 0);
+             border-radius: 16px;
+             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(3.8px);
+            -webkit-backdrop-filter: blur(3.8px);
+            border: 1px solid rgba(25, 34, 32, 0.64);
         }
 
-        /* Center the card horizontally */
         .center-card {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Adjust this if needed */
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-    <div class="container center-card"> <!-- Add the center-card class -->
+    <div class="container center-card"> 
         
         <div class="row">
             <div class="col-md-12 text-center">
@@ -44,7 +52,6 @@
             </div>
         </div>
 
-        <!-- Data Upload and Analyze Card -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
@@ -74,7 +81,7 @@
         }
     </script>
 
-    <!-- Bootstrap JS and JQuery (Make sure to include them at the end of the body) -->
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
