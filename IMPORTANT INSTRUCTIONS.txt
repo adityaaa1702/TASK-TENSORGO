@@ -11,3 +11,11 @@ python manage.py runderver
 
 
 As the Graph is made at the time of sending request it takes time to load so wait for the page to direct to final page. the graph lastly created will be stored in static foloder but will be replaced when new command will be given to the same index page
+
+
+CSV file is consist of 2 columns only
+
+column1,column2
+value1,value2
+value1-1,value2-1
+etc.
