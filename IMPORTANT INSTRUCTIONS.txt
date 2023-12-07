@@ -6,7 +6,8 @@ Clone the repisotry.
 
 Open the project folder in visual code studio
 and run the command 
-python manage.py runderver
+
+python manage.py runserver
 
 
 $$$$$
